@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
+
+export const dynamic = 'force-dynamic'
 import { createClient } from '@/lib/supabase/client'
 
 interface Exercise {

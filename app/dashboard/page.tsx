@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
+
+export const dynamic = 'force-dynamic'
 import { createClient } from '@/lib/supabase/client'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
