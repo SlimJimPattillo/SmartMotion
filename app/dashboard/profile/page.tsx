@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import DashboardLayout from '@/components/DashboardLayout'
 import { createClient } from '@/lib/supabase/client'
 import { getStripe } from '@/lib/stripe/client'
@@ -29,7 +29,7 @@ const GOAL_LABELS: Record<string, string> = {
   jump_higher: 'Jump Higher',
 }
 
-export default function ProfilePage() {
+function ProfileContent() {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [fitnessGoal, setFitnessGoal] = useState<FitnessGoal | null>(null)
   const [editing, setEditing] = useState(false)
@@ -288,5 +288,19 @@ export default function ProfilePage() {
         )}
       </div>
     </DashboardLayout>
+  )
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense fallback={
+      <DashboardLayout>
+        <div className="text-center py-12">
+          <div className="text-primary-blue">Loading profile...</div>
+        </div>
+      </DashboardLayout>
+    }>
+      <ProfileContent />
+    </Suspense>
   )
 }
